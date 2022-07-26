@@ -76,8 +76,12 @@ function svgPathToPolygons(svgPathString, opts={}) {
 
 		if (((d1+d2)*(d1+d2)) < (tolerance2 * (dx*dx + dy*dy))) add(x0123,y0123);
 		else { // Continue subdivision
-		  sampleCubicBézier(x0, y0, x01, y01, x012, y012, x0123, y0123); 
-		  sampleCubicBézier(x0123, y0123, x123, y123, x23, y23, x3, y3); 
+		     if(x1!=x01||y1!=y01||x2!=x012||y2!=y012||x3!=x0123||y3!=y0123){
+			 sampleCubicBézier(x0, y0, x01, y01, x012, y012, x0123, y0123);
+		     }
+		     if(x0!=x0123||y0!=y0123||x1!=x123||y1!=y123||x2!=x23||y2!=y23){
+			 sampleCubicBézier(x0123, y0123, x123, y123, x23, y23, x3, y3);
+		     }
 		}
    }
 
